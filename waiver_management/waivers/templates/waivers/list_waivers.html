@@ -1,0 +1,27 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h2>List of Waivers</h2>
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Project</th>
+        <th>Domain</th>
+        <th>Error Code</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for waiver in waivers %}
+    <tr>
+        <td>{{ waiver.type.name }}</td>
+        <td>{{ waiver.project.name }}</td>
+        <td>{{ waiver.domain.name }}</td>
+        <td>{{ waiver.error_code.code }}</td>
+        <td>{{ waiver.is_approved|yesno:"Approved,Pending" }}</td>
+        <td>
+            <a href="{% url 'approve_waiver' waiver.id %}">Approve</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
